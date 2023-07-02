@@ -87,7 +87,7 @@ function page() {
           signup
         </button>
 
-        <Link href="/login" className="text-blue-500">
+        <Link href="/login" className="text-blue-500 max-w-min">
           Login
         </Link>
       </form>

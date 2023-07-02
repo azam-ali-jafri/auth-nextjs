@@ -46,6 +46,7 @@ function page() {
           onChange={(e) => setUser({ ...user, username: e.target.value })}
           className="px-3 py-2 outline-none border-2 rounded-lg border-gray-200 my-2"
           required
+          autoComplete="off"
         />
         <input
           type="password"
@@ -55,6 +56,7 @@ function page() {
           onChange={(e) => setUser({ ...user, password: e.target.value })}
           className="px-3 py-2 outline-none border-2 rounded-lg border-gray-200 my-2"
           required
+          autoComplete="off"
         />
 
         <button
@@ -64,7 +66,7 @@ function page() {
           Login
         </button>
 
-        <Link href="/signup" className="text-blue-500">
+        <Link href="/signup" className="text-blue-500 max-w-min">
           Signup
         </Link>
       </form>

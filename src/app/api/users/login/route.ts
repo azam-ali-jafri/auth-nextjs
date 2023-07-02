@@ -6,9 +6,9 @@ import jwt from "jsonwebtoken";
 
 connect();
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(request: NextRequest) {
   try {
-    const { username, password } = await req.json();
+    const { username, password } = await request.json();
 
     const user = await User.findOne({ username });
 
@@ -23,9 +23,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }
 
     const tokenData = {
-      username,
-      password,
-      email: user.email,
+      id: user._id,
     };
 
     const token = jwt.sign(tokenData, "jwtsecret", { expiresIn: "1d" });

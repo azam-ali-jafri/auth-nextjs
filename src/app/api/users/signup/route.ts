@@ -3,6 +3,7 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { sendEmail } from "@/helpers/mailer";
 
 connect();
 
@@ -25,11 +26,13 @@ export async function POST(request: NextRequest) {
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
-    const createdUser = await User.create({
+    const user = await User.create({
       username: username.toLowerCase(),
       password: hashedPassword,
       email,
     });
+
+    await sendEmail({ email: user.email, emailType: "VERIFY", userId: user._id });
 
     return NextResponse.json({
       message: "success",
